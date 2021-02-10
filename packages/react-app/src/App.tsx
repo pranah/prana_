@@ -235,6 +235,9 @@ function App() {
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = React.useState<any>()
+  const [pranaReadInstance, setPranaReadInstance] = React.useState(null)
+  const [pranaWriteInstance, setPranaWriteInstance] = React.useState(null)
+
   React.useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
@@ -242,15 +245,21 @@ function App() {
   }, [activatingConnector, connector])
 
   React.useEffect(() => {
+    if(!!(account && library)){
     // let signer = library.getSigner(account);
     console.log("🚀 ~ file: App.tsx ~ line 261 ~ React.useEffect ~ library", library)
     console.log("🚀 ~ file: App.tsx ~ line 264 ~ React.useEffect ~ addresses.prana", addresses.prana)
     console.log("🚀 ~ file: App.tsx ~ line 265 ~ React.useEffect ~ abis.prana", abis.prana)
 
     
-    // const contractInstance = new ethers.Contract(addresses.prana, abis.prana, library);
-    // console.log("🚀 ~ file: App.tsx ~ line 249 ~ React.useEffect ~ contractInstance", contractInstance)
-  }, [account, library])
+    const contractInstance = new ethers.Contract(addresses.prana, abis.prana, library);
+    console.log("🚀 ~ file: App.tsx ~ line 249 ~ React.useEffect ~ contractInstance", contractInstance)
+    setPranaReadInstance(contractInstance)
+    console.log("🚀 ~ file: App.tsx ~ line 262 ~ App ~ pranaReadInstance", pranaReadInstance)
+
+    }
+    
+  }, [account, library, pranaReadInstance])
 
   // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
   const triedEager = useEagerConnect()
@@ -260,6 +269,7 @@ function App() {
 
   return (
     <>
+    {/* <button>Log In</button> */}
       <Header />
       <hr style={{ margin: '2rem' }} />
       <div
