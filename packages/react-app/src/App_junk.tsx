@@ -32,7 +32,6 @@ import {
 
 import {Home} from './pages/Home';
 
-
 enum ConnectorNames {
   Injected = 'Injected',
   Network = 'Network',
@@ -272,18 +271,242 @@ function App() {
 
   return (
     <>
-    {account && 
-    
+    {account && connector &&
     <Home />
 
     }
-    {(!account) &&
+    {(!account) && !connector &&
     <button>Log In</button>
 
     
 
     }
-      
+      <Header />
+      <hr style={{ margin: '2rem' }} />
+      <div
+        style={{
+          display: 'grid',
+          gridGap: '1rem',
+          gridTemplateColumns: '1fr 1fr',
+          maxWidth: '20rem',
+          margin: 'auto'
+        }}
+      >
+        {Object.keys(connectorsByName).map(name => {
+          const currentConnector = connectorsByName[name]
+          const activating = currentConnector === activatingConnector
+          const connected = currentConnector === connector
+          const disabled = !triedEager || !!activatingConnector || connected || !!error
+
+          return (
+            <button
+              style={{
+                height: '3rem',
+                borderRadius: '1rem',
+                borderColor: activating ? 'orange' : connected ? 'green' : 'unset',
+                cursor: disabled ? 'unset' : 'pointer',
+                position: 'relative'
+              }}
+              disabled={disabled}
+              key={name}
+              onClick={() => {
+                setActivatingConnector(currentConnector)
+                activate(connectorsByName[name])
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '0',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: 'black',
+                  margin: '0 0 0 1rem'
+                }}
+              >
+                {/* {activating && <Spinner color={'black'} style={{ height: '25%', marginLeft: '-1rem' }} />} */}
+                {connected && (
+                  <span role="img" aria-label="check">
+                    ✅
+                  </span>
+                )}
+              </div>
+              {name}
+            </button>
+          )
+        })}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {(active || error) && (
+          <button
+            style={{
+              height: '3rem',
+              marginTop: '2rem',
+              borderRadius: '1rem',
+              borderColor: 'red',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              deactivate()
+            }}
+          >
+            Deactivate
+          </button>
+        )}
+
+        {!!error && <h4 style={{ marginTop: '1rem', marginBottom: '0' }}>{getErrorMessage(error)}</h4>}
+      </div>
+
+      <hr style={{ margin: '2rem' }} />
+
+      <div
+        style={{
+          display: 'grid',
+          gridGap: '1rem',
+          gridTemplateColumns: 'fit-content',
+          maxWidth: '20rem',
+          margin: 'auto'
+        }}
+      >
+        {!!(library && account) && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              library
+                .getSigner(account)
+                .signMessage('👋')
+                .then((signature: any) => {
+                  window.alert(`Success!\n\n${signature}`)
+                })
+                .catch((error: any) => {
+                  window.alert('Failure!' + (error && error.message ? `\n\n${error.message}` : ''))
+                })
+            }}
+          >
+            Sign Message
+          </button>
+        )}
+        {!!(connector === network && chainId) && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              ;(connector as any).changeChainId(chainId === 1 ? 4 : 1)
+            }}
+          >
+            Switch Networks
+          </button>
+        )}
+        {/* {connector === walletconnect && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              ;(connector as any).close()
+            }}
+          >
+            Kill WalletConnect Session
+          </button>
+        )} */}
+        {/* {connector === walletlink && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              ;(connector as any).close()
+            }}
+          >
+            Kill WalletLink Session
+          </button>
+        )} */}
+        {/* {connector === fortmatic && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              ;(connector as any).close()
+            }}
+          >
+            Kill Fortmatic Session
+          </button>
+        )}
+        {connector === magic && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              ;(connector as any).close()
+            }}
+          >
+            Kill Magic Session
+          </button>
+        )}
+        {connector === portis && (
+          <>
+            {chainId !== undefined && (
+              <button
+                style={{
+                  height: '3rem',
+                  borderRadius: '1rem',
+                  cursor: 'pointer'
+                }}
+                onClick={() => {
+                  ;(connector as any).changeNetwork(chainId === 1 ? 100 : 1)
+                }}
+              >
+                Switch Networks
+              </button>
+            )}
+            <button
+              style={{
+                height: '3rem',
+                borderRadius: '1rem',
+                cursor: 'pointer'
+              }}
+              onClick={() => {
+                ;(connector as any).close()
+              }}
+            >
+              Kill Portis Session
+            </button>
+          </>
+        )}
+        {connector === torus && (
+          <button
+            style={{
+              height: '3rem',
+              borderRadius: '1rem',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              ;(connector as any).close()
+            }}
+          >
+            Kill Torus Session
+          </button>
+        )} */}
+      </div>
     </>
   )
 }
