@@ -1,14 +1,16 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
+import {MiniDrawer} from "../components/NavBar";
 
 
 export function Home() {
   return (
     <>
-    <h2>Home Component</h2>
+    {/* <h2>Home Component</h2>
     <Button variant="contained" color="primary">
     Hello World
-  </Button>
+  </Button> */}
+  <MiniDrawer/>
     </>
   )
 }
