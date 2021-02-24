@@ -15,10 +15,18 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import CreateIcon from '@material-ui/icons/Create';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import InfoIcon from '@material-ui/icons/Info';
+import FaceIcon from '@material-ui/icons/Face';
 
-const drawerWidth = 240;
+
+const drawerWidth = 200;
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,8 +124,8 @@ export function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
+          <Typography variant="h4" noWrap>
+            prana:
           </Typography>
         </Toolbar>
       </AppBar>
@@ -140,23 +148,39 @@ export function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <List aria-label="Side menu list">
+        <ListItem button>
+          <ListItemIcon>
+            <CreateIcon />
+          </ListItemIcon>
+          <ListItemText primary="Publish" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <MenuBookIcon />
+          </ListItemIcon>
+          <ListItemText primary="Marketplace" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Profile" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GroupWorkIcon />
+          </ListItemIcon>
+          <ListItemText primary="Community" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary="'About" />
+        </ListItem>
+      </List>
+        
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
