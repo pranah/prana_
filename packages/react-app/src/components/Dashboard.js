@@ -23,6 +23,12 @@ import InfoIcon from '@material-ui/icons/Info';
 import FaceIcon from '@material-ui/icons/Face';
 import {useSelector, useDispatch} from 'react-redux'
 
+import {Marketplace} from "../tabs/Marketplace";
+import {MyProfile} from "../tabs/MyProfile";
+import {Publish} from "../tabs/Publish";
+import {About} from "../tabs/About";
+import {Community} from "../tabs/Community";
+
 const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
@@ -87,12 +93,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MiniDrawer() {
+export function Dashboard() {
   const userAccount = useSelector(state => state.web3.userAccount)
+  const [controlAt, setControlAt] = React.useState(0);
 
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   userClickedAt(0);
+  // }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -101,6 +112,10 @@ export function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const userClickedAt = (controlIndex) => {
+    setControlAt(controlIndex);
+  }
 
   return (
     <div className={classes.root}>
@@ -148,43 +163,50 @@ export function MiniDrawer() {
         </div>
         <Divider />
         <List aria-label="Side menu list">
-        <ListItem button>
+        <ListItem button onClick={() => {userClickedAt(0)}}>
+          <ListItemIcon>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="My Profile" />
+        </ListItem>
+        <ListItem button onClick={() => {userClickedAt(1)}}>
           <ListItemIcon>
             <CreateIcon />
           </ListItemIcon>
           <ListItemText primary="Publish" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => {userClickedAt(2)}}>
           <ListItemIcon>
             <MenuBookIcon />
           </ListItemIcon>
           <ListItemText primary="Marketplace" />
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Profile" />
-        </ListItem>
-        <ListItem button>
+        
+        <ListItem button onClick={() => {userClickedAt(3)}}>
           <ListItemIcon>
             <GroupWorkIcon />
           </ListItemIcon>
           <ListItemText primary="Community" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => {userClickedAt(4)}} >
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
-          <ListItemText primary="'About" />
+          <ListItemText primary="About" />
         </ListItem>
       </List>
         
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
+        {controlAt ==0 && <MyProfile/>}
+        {controlAt ==1 && <Publish/>}
+        {controlAt ==2 && <Marketplace/>}
+        {controlAt ==3 && <Community/>}
+        {controlAt ==4 && <About/>}
         <h1>User Address: {userAccount} </h1>
-        <Typography paragraph>
+        {/* <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
           facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
@@ -206,7 +228,7 @@ export function MiniDrawer() {
           tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
           nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
           accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        </Typography> */}
       </main>
     </div>
   );

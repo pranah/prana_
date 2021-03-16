@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
-import {MiniDrawer} from "../components/NavBar";
+import {Dashboard} from "../components/Dashboard";
 
 
 // ReactDOM.render(<MiniDrawer/>, document.querySelector('#root'));
@@ -12,7 +12,7 @@ export function Home() {
     <Button variant="contained" color="primary">
     Hello World
   </Button> */}
-  <MiniDrawer/>
+  <Dashboard/>
     </>
   )
 }
