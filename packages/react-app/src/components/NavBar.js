@@ -21,15 +21,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import InfoIcon from '@material-ui/icons/Info';
 import FaceIcon from '@material-ui/icons/Face';
-
-
-const drawerWidth = 200;
-
-
-
 import {useSelector, useDispatch} from 'react-redux'
 
-// const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
