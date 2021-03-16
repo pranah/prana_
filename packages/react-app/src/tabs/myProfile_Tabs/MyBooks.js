@@ -1,11 +1,10 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
 
-export function Publish() {
+export function MyBooks() {
   return (
     <>
-    <h2>Publish Component</h2>
-    
+    <h2>My books Component</h2>
     </>
   )
 }
