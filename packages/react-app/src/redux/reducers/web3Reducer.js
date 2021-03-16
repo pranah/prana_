@@ -1,8 +1,10 @@
-import { ADD_TODO, TOGGLE_TODO } from "../actionTypes";
+import { ADD_TODO, TOGGLE_TODO, GET_USER_ACCOUNT } from "../actionTypes";
 
 const initialState = {
   allIds: [],
-  byIds: {}
+  byIds: {},
+  userAccount: null
+
 };
 
 export default function(state = initialState, action) {
@@ -32,6 +34,13 @@ export default function(state = initialState, action) {
             completed: !state.byIds[id].completed
           }
         }
+      };
+    }
+    case GET_USER_ACCOUNT: {
+      const { userAccount } = action.payload;
+      return {
+        ...state,
+        userAccount
       };
     }
     default:

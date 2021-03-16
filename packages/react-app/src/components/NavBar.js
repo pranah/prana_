@@ -18,6 +18,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+import {useSelector, useDispatch} from 'react-redux'
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -83,6 +85,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function MiniDrawer() {
+  const userAccount = useSelector(state => state.web3.userAccount)
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -160,6 +164,7 @@ export function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <h1>User Address: {userAccount} </h1>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum

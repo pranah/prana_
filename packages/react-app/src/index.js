@@ -14,10 +14,10 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  // <Provider store={store}>
+  <Provider store={store}>
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
-  // </Provider>,
+  </Provider>,
   document.getElementById("root"),
 );

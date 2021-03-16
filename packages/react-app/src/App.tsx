@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux'
 // import * as React from 'react'
 import { Contract } from "@ethersproject/contracts";
 import { getDefaultProvider } from "@ethersproject/providers";
@@ -31,6 +32,8 @@ import {
 } from './connectors'
 
 import {Home} from './pages/Home';
+
+import {getUserAccount} from './redux/actions/web3Actions'
 
 
 enum ConnectorNames {
@@ -228,13 +231,13 @@ function Header() {
 }
 
 function App() {
+  const dispatch = useDispatch()
+
   const context = useWeb3React<Web3Provider>()
   const { connector, activate, deactivate} = context
   // const { connector, library, chainId, account, activate, deactivate, active, error } = context
 
   const { active, error, account, library, chainId } = useWeb3React();
-
-  
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = React.useState<any>()
@@ -260,6 +263,7 @@ function App() {
     setPranaReadInstance(contractInstance)
     // console.log("🚀 ~ file: App.tsx ~ line 262 ~ App ~ pranaReadInstance", pranaReadInstance)
 
+      dispatch(getUserAccount(account));
     }
     
   }, [account, library])
@@ -279,9 +283,6 @@ function App() {
     }
     {(!account) &&
     <button>Log In</button>
-
-    
-
     }
       
     </>
