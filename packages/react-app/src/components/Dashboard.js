@@ -205,7 +205,7 @@ export function Dashboard() {
         {controlAt ==2 && <Marketplace/>}
         {controlAt ==3 && <Community/>}
         {controlAt ==4 && <About/>}
-        <h1>User Address: {userAccount} </h1>
+        {/* <h1>User Address: {userAccount} </h1> */}
         {/* <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
