@@ -1,9 +1,22 @@
-import { ADD_TODO, TOGGLE_TODO, GET_USER_ACCOUNT } from "../actionTypes";
+import { 
+  ADD_TODO, TOGGLE_TODO, SET_USER_ACCOUNT,
+  SET_PRANA_CONTRACT,
+  SET_PRANA_HELPER_CONTRACT,
+} from "../actionTypes";
 
 const initialState = {
   allIds: [],
   byIds: {},
-  userAccount: null
+  userAccount: null,
+  pranaContract: null,
+  pranaHelperContract: null,
+  myPublishedContent: [],
+  myCollectedTokens: [],
+  myRentedTokens: [],
+  collectableContent: [],
+  resaleTokens: [],
+  rentTokens: [],
+  
 
 };
 
@@ -36,11 +49,25 @@ export default function(state = initialState, action) {
         }
       };
     }
-    case GET_USER_ACCOUNT: {
+    case SET_USER_ACCOUNT: {
       const { userAccount } = action.payload;
       return {
         ...state,
         userAccount
+      };
+    }
+    case SET_PRANA_CONTRACT: {
+      const { pranaContract } = action.payload;
+      return {
+        ...state,
+        pranaContract
+      };
+    }
+    case SET_PRANA_HELPER_CONTRACT: {
+      const { pranaHelperContract } = action.payload;
+      return {
+        ...state,
+        pranaHelperContract
       };
     }
     default:

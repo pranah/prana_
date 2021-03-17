@@ -33,7 +33,7 @@ import {
 
 import {Home} from './pages/Home';
 
-import {getUserAccount} from './redux/actions/web3Actions'
+import {setPranaContract, setUserAccount} from './redux/actions/web3Actions'
 
 
 enum ConnectorNames {
@@ -263,7 +263,8 @@ function App() {
     setPranaReadInstance(contractInstance)
     // console.log("🚀 ~ file: App.tsx ~ line 262 ~ App ~ pranaReadInstance", pranaReadInstance)
 
-      dispatch(getUserAccount(account));
+      dispatch(setUserAccount(account));
+      dispatch(setPranaContract(contractInstance));
     }
     
   }, [account, library])

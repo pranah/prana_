@@ -1,6 +1,20 @@
-import { GET_USER_ACCOUNT, ADD_TODO, TOGGLE_TODO, SET_FILTER } from "../actionTypes";
+import { 
+  SET_USER_ACCOUNT, 
+  SET_PRANA_CONTRACT, 
+  SET_PRANA_HELPER_CONTRACT 
+} from "../actionTypes";
 
-export const getUserAccount = userAccount => ({
-    type: GET_USER_ACCOUNT,
-    payload: { userAccount }
-  });
+export const setUserAccount = userAccount => ({
+  type: SET_USER_ACCOUNT,
+  payload: { userAccount }
+});
+
+export const setPranaContract = pranaContract => ({
+  type: SET_PRANA_CONTRACT,
+  payload: { pranaContract }
+});
+
+export const setPranaHelperContract = pranaHelperContract => ({
+  type: SET_PRANA_HELPER_CONTRACT,
+  payload: { pranaHelperContract }
+});
